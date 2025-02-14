@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti</title>
+    <style>
+        /* Importar la fuente Great Vibes de Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+        /* Importar una fuente tipo "carta escrita a mano" */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Sacramento&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb);
+            background-size: 600% 600%;
+            animation: gradientBG 10s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            color: #e74c3c;
+            font-family: 'Great Vibes', cursive; /* Aplicar la fuente Great Vibes */
+            font-size: 4em; /* Tamaño más grande */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave */
+        }
+        .message {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .heart {
+            color: #e74c3c;
+            font-size: 3em;
+            animation: beat 1s infinite;
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #secretMessage {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333; /* Color de texto más oscuro */
+            background-color: white; /* Fondo blanco */
+            padding: 20px; /* Espaciado interno */
+            border: 1px solid #ddd; /* Borde sutil */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            max-width: 600px; /* Ancho máximo */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left; /* Alinear texto a la izquierda */
+            font-family: 'Dancing Script', cursive; /* Fuente tipo carta */
+            line-height: 1.6; /* Espaciado entre líneas */
+        }
+        #flowerBouquet {
+            display: none; /* Ocultar el ramo inicialmente */
+            margin-top: 20px;
+        }
+        .flower {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine's Day</h1>
+    <div class="heart">❤️❤️❤️</div>
+    <button onclick="revealMessageAndPlayMusic()">OPEN</button>
+    <div id="secretMessage">
+        <p>Dicen que hay encuentros que parecen estar escritos antes de suceder. No sé si el nuestro lo estaba, pero si algo he aprendido, es que hay cosas que simplemente valen la pena.</p>
+        <p>Hay una frase en <em>Antes del amanecer</em> que me gusta:</p>
+        <blockquote>
+            "Si hay algún tipo de magia en este mundo, debe estar en el intento de comprender a alguien compartiendo algo."
+        </blockquote>
+        <p>Y eso es justo lo que quiero contigo: seguir compartiendo momentos, descubriéndote más allá de los mensajes, más allá de lo que ya sé y de todo lo que aún me queda por conocer.</p>
+    </div>
+    <div id="flowerBouquet"></div> <!-- Contenedor para el ramo de flores -->
+    <audio id="backgroundMusic" loop>
+        <source src="audio/MILO.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function revealMessageAndPlayMusic() {
+            // Revelar el mensaje secreto
+            document.getElementById('secretMessage').style.display = 'block';
+
+            // Reproducir la música
+            const audio = document.getElementById('backgroundMusic');
+            audio.muted = false; // Asegúrate de que no esté silenciado
+            audio.play().catch(error => {
+                console.error("Error al reproducir el audio:", error);
+                alert("Haz clic en 'Aceptar' para permitir la reproducción de audio.");
+            });
+
+            // Lanzar confeti
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Dibujar el ramo de flores
+            drawFlowerBouquet();
+        }
+
+        function drawFlowerBouquet() {
+            const bouquetContainer = document.getElementById('flowerBouquet');
+            bouquetContainer.innerHTML = `
+                <svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Jarrón -->
+                    <path d="M100 280 L200 280 Q220 280 220 260 L220 230 Q220 210 200 210 L100 210 Q80 210 80 230 L80 260 Q80 280 100 280 Z" fill="#A0522D" />
+
+                    <!-- Tallos -->
+                    <rect x="110" y="70" width="5" height="140" fill="#228B22" />
+                    <rect x="130" y="110" width="5" height="100" fill="#228B22" />
+                    <rect x="150" y="70" width="5" height="140" fill="#228B22" />
+                    <rect x="170" y="110" width="5" height="100" fill="#228B22" />
+                    <rect x="190" y="70" width="5" height="140" fill="#228B22" />
+                    <!-- Hojas -->
+                    <ellipse cx="170" cy="150" rx="10" ry="20" fill="#228B22" transform="rotate(-30, 145, 280)" />
+                    <ellipse cx="110" cy="185" rx="10" ry="20" fill="#228B22" transform="rotate(30, 165, 280)" />
+                    <ellipse cx="180" cy="180" rx="10" ry="20" fill="#228B22" transform="rotate(-30, 145, 280)" />
+                    <ellipse cx="145" cy="165" rx="10" ry="20" fill="#228B22" transform="rotate(30, 165, 280)" />
+                    <ellipse cx="200" cy="180" rx="10" ry="20" fill="#228B22" transform="rotate(-30, 145, 280)" />
+                    <ellipse cx="135" cy="165" rx="10" ry="20" fill="#228B22" transform="rotate(20, 155, 300)" />
+                    <!-- Flores -->
+                    <g class="flower" transform="translate(130, 100)">
+                        <circle cx="110" cy="70" r="15" fill="#FF69B4" />
+                        <circle cx="100" cy="60" r="10" fill="#FF69B4" />
+                        <circle cx="120" cy="60" r="10" fill="#FF69B4" />
+                        <circle cx="100" cy="80" r="10" fill="#FF69B4" />
+                        <circle cx="120" cy="80" r="10" fill="#FF69B4" />
+                        <circle cx="110" cy="70" r="7" fill="#FFD700" />
+                    </g>
+                    <g class="flower" transform="translate(160, 80)">
+                        <circle cx="132" cy="110" r="15" fill="#FF69B4" />
+                        <circle cx="122" cy="100" r="10" fill="#FF69B4" />
+                        <circle cx="142" cy="100" r="10" fill="#FF69B4" />
+                        <circle cx="122" cy="120" r="10" fill="#FF69B4" />
+                        <circle cx="142" cy="120" r="10" fill="#FF69B4" />
+                        <circle cx="132" cy="110" r="7" fill="#FFD700" />
+                    </g>
+                    <g class="flower" transform="translate(190, 100)">
+                        <circle cx="152" cy="70" r="15" fill="#FF69B4" />
+                        <circle cx="142" cy="60" r="10" fill="#FF69B4" />
+                        <circle cx="162" cy="60" r="10" fill="#FF69B4" />
+                        <circle cx="142" cy="80" r="10" fill="#FF69B4" />
+                        <circle cx="162" cy="80" r="10" fill="#FF69B4" />
+                        <circle cx="152" cy="70" r="7" fill="#FFD700" />
+                    </g>
+                    <g class="flower" transform="translate(100, 120)">
+                        <circle cx="172" cy="110" r="15" fill="#FF69B4" />
+                        <circle cx="162" cy="100" r="10" fill="#FF69B4" />
+                        <circle cx="182" cy="100" r="10" fill="#FF69B4" />
+                        <circle cx="162" cy="120" r="10" fill="#FF69B4" />
+                        <circle cx="182" cy="120" r="10" fill="#FF69B4" />
+                        <circle cx="172" cy="110" r="7" fill="#FFD700" />
+                    </g>
+                    <g class="flower" transform="translate(70, 100)">
+                        <circle cx="192" cy="70" r="15" fill="#FF69B4" />
+                        <circle cx="182" cy="60" r="10" fill="#FF69B4" />
+                        <circle cx="202" cy="60" r="10" fill="#FF69B4" />
+                        <circle cx="182" cy="80" r="10" fill="#FF69B4" />
+                        <circle cx="202" cy="80" r="10" fill="#FF69B4" />
+                        <circle cx="192" cy="70" r="7" fill="#FFD700" />
+                    </g>
+                </svg>
+            `;
+            bouquetContainer.style.display = 'block'; // Mostrar el ramo
+        }
+    </script>
+</body>
+</html>
